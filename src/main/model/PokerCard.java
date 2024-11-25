@@ -15,14 +15,21 @@ public class PokerCard implements Card{
         this.suit = suit;
     }
 
+    @Override
     public Rank getRank() {
         return rank;
     }
 
+    @Override
     public Suit getSuit() {
         return suit;
     }
 
+    @Override 
+    public String display(){
+
+        return rank + " of " + suit;
+    }
     
     
     /*
