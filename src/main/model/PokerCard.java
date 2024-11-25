@@ -1,6 +1,6 @@
 public class PokerCard implements Card{
     public enum Rank {
-        TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NINE, TEN, JACK, QUEEN, KING, ACE
+        ACE, TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NINE, TEN, JACK, QUEEN, KING
     }
 
     public enum Suit {
@@ -29,6 +29,11 @@ public class PokerCard implements Card{
     public String display(){
 
         return rank + " of " + suit;
+    }
+
+    @Override 
+    public int getRankValue(){
+        return rank.ordinal();
     }
     
     
