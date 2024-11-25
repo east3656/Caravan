@@ -4,11 +4,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CaravanGameModel implements GameModel {
-  private final Deck playerHand = new SimpleDeck();
-  private final Deck opponentHand = new SimpleDeck();
+  private final Deck playerHand;
+  private final Deck opponentHand;
 
   
   public CaravanGameModel() {
+
+    //initialize hands of opponents
+    private final Deck playerHand = new PokerDeck(5);
+    private final Deck opponentHand = new PokerDeck(5);
+
+    //initialize decks to draw from. 
+    private final Deck playerDeck = new PokerDeck();
+    private final Deck opponentDeck = new PokerDeck();
+
+    
+
+    
        
   }
 
