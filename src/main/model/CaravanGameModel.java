@@ -27,7 +27,18 @@ public class CaravanGameModel implements GameModel {
 
   @Override
   public void startGame() {
-        // implement
+      Scanner scanner = new Scanner(System.in);
+
+      while (true) {
+          String userInput = scanner.nextLine().toLowerCase().trim();
+          if (userInput.equalsIgnoreCase("quit") || userInput.equalsIgnoreCase("q")) {
+              break;
+          } else{
+              //add
+          }
+      }
+
+      scanner.close();
     }
   
   @Override
@@ -53,20 +64,7 @@ public class CaravanGameModel implements GameModel {
   @Override
   GameState getGameState(){}
 
-  public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        
-        while (true) {
-            String userInput = scanner.nextLine().toLowerCase().trim();
-            if (userInput.equalsIgnoreCase("quit") || userInput.equalsIgnoreCase("q")) {
-                break;
-            } else{
-               //add
-            }
-        }
-        
-        scanner.close();
-    }
+
 
 
  
