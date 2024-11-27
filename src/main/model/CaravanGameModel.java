@@ -8,6 +8,14 @@ public class CaravanGameModel implements GameModel {
   private final Deck playerHand;
   private final Deck opponentHand;
 
+
+  private static String helpCenter(){
+      return ("To play any card in your hand, you must input the correct number \n"
+      "from 1 to 5 associated with it. If permissible and you wish to draw a card, \n" +
+              "press D key.");
+
+  }
+
   
   public CaravanGameModel() {
 
@@ -25,25 +33,53 @@ public class CaravanGameModel implements GameModel {
        
   }
 
+  public boolean is(String a){
+      return this.equalsIgnoreCase(a);
+  }
+
   @Override
   public void startGame() {
       Scanner scanner = new Scanner(System.in);
 
+      System.out.println("For help on controls, input h or help");
       while (true) {
           String userInput = scanner.nextLine().toLowerCase().trim();
-          if (userInput.equalsIgnoreCase("quit") || userInput.equalsIgnoreCase("q")) {
+          if (userInput.is("quit") || userInput.is("q")) {
               break;
-          } else{
-              //add
+
+          }
+          if(userInput.is("help") || userInput.is("h")){
+              return helpCenter();
+          }
+          else{
+
+              move(userInput);
+              //complete code with enemy movement, etc.
+
+
           }
       }
 
       scanner.close();
     }
+
+
+    public static void move(String m){
+
+      if (m.is("d")){
+          //draw card code
+      }else if (m.is("1") || m.is("2") || m.is("3") || m.is("4") || m.is("5")){
+
+          playCard(parseInt(m));
+      }else {
+          System.out.println("Invalid input. Try again");
+      }
+    }
+
   
   @Override
   public void playCard() {
-      // implement
+      // implement move.
   }
 
 
