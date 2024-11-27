@@ -2,6 +2,7 @@ package model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class CaravanGameModel implements GameModel {
   private final Deck playerHand;
@@ -51,6 +52,21 @@ public class CaravanGameModel implements GameModel {
   
   @Override
   GameState getGameState(){}
+
+  public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        
+        while (true) {
+            String userInput = scanner.nextLine().toLowerCase().trim();
+            if (userInput.equalsIgnoreCase("quit") || userInput.equalsIgnoreCase("q")) {
+                break;
+            } else{
+               //add
+            }
+        }
+        
+        scanner.close();
+    }
 
 
  
