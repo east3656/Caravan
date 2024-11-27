@@ -26,7 +26,7 @@ public class CaravanGameModel implements GameModel {
   }
 
   @Override
-  public void initializeGame() {
+  public void startGame() {
         // implement
     }
   

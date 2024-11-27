@@ -1,7 +1,7 @@
 package model;
 
 public interface GameModel {
-    void initializeGame();
+    void startGame();
 
     //Actions
     void playCard();
