@@ -1,6 +1,6 @@
 package main;
 
-import main.model.GameModel;
+
 import model.CaravanGameModel;
 
 public class Main {
