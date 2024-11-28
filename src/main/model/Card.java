@@ -1,8 +1,7 @@
-package model;
+package main.model;
 
 public interface Card {
     Rank getRank();
     Suit getSuit();
-    String display(); // e.g., "Ace of Hearts"
     int getRankValue();
 }

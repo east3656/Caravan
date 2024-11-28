@@ -1,27 +1,20 @@
-package model;
+package main.model;
 
-import java.util.ArrayList;
-import java.util.List;
+
 import java.util.Scanner;
-import model.Deck;
+
+import static java.lang.Integer.parseInt;
 
 
 public class CaravanGameModel implements GameModel {
   private final Deck playerHand;
   private final Deck opponentHand;
 
-    private final Deck playerHand = new PokerDeck(5);
-    private final Deck opponentHand = new PokerDeck(5);
-
-    //initialize decks to draw from.
-    private final Deck playerDeck = new PokerDeck();
-    private final Deck opponentDeck = new PokerDeck();
-
 
   private static String helpCenter(){
       return ("To play any card in your hand, you must input the correct number \n" +
       "from 1 to 5 associated with it. If permissible and you wish to draw a card, \n" +
-              "press D key.");
+              "select D key.");
 
   }
 
@@ -29,17 +22,9 @@ public class CaravanGameModel implements GameModel {
   public CaravanGameModel() {
 
     //initialize hands of opponents
-    private final Deck playerHand = new PokerDeck(5);
-    private final Deck opponentHand = new PokerDeck(5);
+      playerHand = new PokerDeck(5);
+      opponentHand = new PokerDeck(5);
 
-    //initialize decks to draw from. 
-    private final Deck playerDeck = new PokerDeck();
-    private final Deck opponentDeck = new PokerDeck();
-
-    
-
-    
-       
   }
 
   public static boolean is(String a, String b){
@@ -64,7 +49,7 @@ public class CaravanGameModel implements GameModel {
           }
           else{
 
-              move(userInput);
+              game.move(userInput);
               //complete code with enemy movement, etc.
 
 
@@ -75,13 +60,13 @@ public class CaravanGameModel implements GameModel {
     }
 
 
-    public static void move(String m){
+    public void move(String m){
 
-      if (m.is("d")){
+      if (is("d", m)){
           //draw card code
-      }else if (m.is("1") || m.is("2") || m.is("3") || m.is("4") || m.is("5")){
-
-          playCard(parseInt(m));
+      }else if (is("1",m) || is("2",m) || is("3",m) || is("4",m) || is("5",m)){
+          System.out.println("You chose " + (playerHand.getCards().get(parseInt(m) - 1)).toString() + ".");
+          this.playCard(parseInt(m));
       }else {
           System.out.println("Invalid input. Try again");
       }
@@ -89,7 +74,7 @@ public class CaravanGameModel implements GameModel {
 
   
   @Override
-  public void playCard() {
+  public void playCard(int m) {
       // implement move.
   }
 
@@ -99,20 +84,8 @@ public class CaravanGameModel implements GameModel {
     // implement 
   }
 
-  @Override
-  boolean isGameOver(){return false;}
-  
-  @Override
-  void playTurn(Player player){}
-  
-  @Override
-  void endGame(){}
-  
-  @Override
-  GameState getGameState(){}
-
-
-
-
+//  @Override
+//  boolean isGameOver(){return false;}
+//
  
 }
