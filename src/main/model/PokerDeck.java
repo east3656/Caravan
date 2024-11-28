@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.List;
 
 
+
 public class PokerDeck implements Deck {
     private final List<Card> cards = new ArrayList<>();
     private final int maxSize; //this is the MAX LIMIT SIZE OF A DECK. NOT THE ACTUAL SIZE OF THE DECK
@@ -23,6 +24,10 @@ public class PokerDeck implements Deck {
     public PokerDeck(int n){
         assert n>0;
         maxSize = n;
+
+        for (int i = 0; i < n; i++) {
+            cards.add(new PokerCard());
+        }
 
     }
 
@@ -63,11 +68,39 @@ public class PokerDeck implements Deck {
     }
 
     @Override
-    public String display() {
+    public String display(int i) {
+
+        if(i>cards.size()){return "none";}
+        else {
+            return cards.get(i).toString();
+        }
+
+    } //DEPRECATED
+
+
+
+    @Override
+    public String displayAsHand() {
+
+        if (isEmpty()){return "[EMPTY HAND]";}
         StringBuilder sb = new StringBuilder();
-        for (int i = cards.size() - 1; i >= 0; i--) { // IMPORTANT: WE ARE DISPLAYING FROM LAST CARD EVER INSERTED, SO LAST IN THE ARRAYLIST TO FIRST TO RESPECT A TOP FIRST BOTTOM UP APPROACH
-            sb.append(cards.get(i).toString()).append("\n");
+        for (int i = 1; i < cards.size(); i++) {
+            sb.append(i).append(".").append(cards.get(i).toString()).append(" | ");
         }
         return sb.toString();
     }
+
+    @Override
+    public int returnAllRankValue(){
+        int e = 0;
+        if (cards.isEmpty()){return e;}
+        for (Card card: cards){
+            e+=card.getRankValue();
+        }
+        return e;
+    }
+
+
+
+
 }

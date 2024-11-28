@@ -11,7 +11,7 @@ public class DeckDisplay implements Display {
 
     @Override
     public String render() {
-        return deck.display();
+        return "";
     }
 
 }

@@ -38,27 +38,36 @@ public class CaravanGameModel implements GameModel {
 
 
       CaravanGameModel game = new CaravanGameModel();
-      System.out.println("For help on controls, input h or help");
-      while (true) {
-          String userInput = scanner.nextLine().toLowerCase().trim();
-          if (is("quit", userInput) || is("q", userInput)) {
-              break;
 
+
+      System.out.println("You are currently playing Console text-based Caravan.");
+
+      while (true){
+
+          System.out.println("Your hand: " + playerHand.displayAsHand());
+          System.out.println("For help on controls, input h or help");
+          while (true) {
+              String userInput = scanner.nextLine().toLowerCase().trim();
+              if (is("quit", userInput) || is("q", userInput)) {
+                  break;
+
+              }
+              if(is("help", userInput) || is("h", userInput)){
+                  System.out.println(helpCenter());
+              }
+              else{
+
+                  game.move(userInput);
+                  //complete code with enemy movement, etc.
+              }
           }
-          if(is("help", userInput) || is("h", userInput)){
-              System.out.println(helpCenter());
-          }
-          else{
+          break;
 
-              game.move(userInput);
-              //complete code with enemy movement, etc.
+      }
+      scanner.close();
 
-
-          }
       }
 
-      scanner.close();
-    }
 
 
     public void move(String m){

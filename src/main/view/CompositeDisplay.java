@@ -11,12 +11,22 @@ public class CompositeDisplay implements Display {
         components.add(component);
     }
 
+    public CompositeDisplay(){
+
+    }
+
+
     @Override
     public String render() {
         StringBuilder sb = new StringBuilder();
+
         for (Display component : components) {
+
+
+
             sb.append(component.render()).append("\n");
         }
         return sb.toString();
     }
+
 }
