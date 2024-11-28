@@ -1,6 +1,7 @@
-import model.Deck;
+package main.view;
+import main.model.Deck;
 
-public class DeckDisplay implements Display{
+public class DeckDisplay implements Display {
 
   private final Deck deck;
   

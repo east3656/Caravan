@@ -13,8 +13,9 @@ public class CaravanGameModel implements GameModel {
 
   private static String helpCenter(){
       return ("To play any card in your hand, you must input the correct number \n" +
-      "from 1 to 5 associated with it. If permissible and you wish to draw a card, \n" +
-              "select D key.");
+      "from 1 to 5 associated with it. If permissible and you wish to \n " +
+              "draw a card, select D key.\n" +
+              "To quit, input q or quit.");
 
   }
 

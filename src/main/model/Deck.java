@@ -7,4 +7,5 @@ public interface Deck {
     boolean addCard(Card card);
     Card removeCard(); //WATCH OUT FOR THIS ONE LATER ON
     boolean isEmpty();
+    String display();
 }

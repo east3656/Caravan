@@ -63,7 +63,7 @@ public class PokerDeck implements Deck {
     }
 
     @Override
-    public String toString() {
+    public String display() {
         StringBuilder sb = new StringBuilder();
         for (int i = cards.size() - 1; i >= 0; i--) { // IMPORTANT: WE ARE DISPLAYING FROM LAST CARD EVER INSERTED, SO LAST IN THE ARRAYLIST TO FIRST TO RESPECT A TOP FIRST BOTTOM UP APPROACH
             sb.append(cards.get(i).toString()).append("\n");

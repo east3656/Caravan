@@ -1,7 +1,8 @@
 package main;
 
 
-import model.CaravanGameModel;
+
+import main.model.CaravanGameModel;
 
 public class Main {
     public static void main(String[] args) {
