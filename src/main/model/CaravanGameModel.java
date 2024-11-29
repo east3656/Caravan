@@ -38,8 +38,10 @@ public class CaravanGameModel implements GameModel {
   }
 
 
-  public int parseInput(String n, boolean deck){
+  public int parseInput(boolean deck){
 
+      Scanner scanner = new Scanner(System.in);
+              String n = scanner.nextLine();
       if (is("quit", n) || is("q", n)) {
           return -1;
       }
@@ -47,13 +49,17 @@ public class CaravanGameModel implements GameModel {
           System.out.println(helpCenter());
           return 0;
       }
+
       else{
           int pass;
           do {
               pass = this.parseMove(n, deck);
-          }while(pass!=0);
+              if (pass==-1 | pass==2){
+                  n = scanner.nextLine();
+              }
+          }while(pass==2 | pass==-1);
 
-          return 0;
+          return pass;
       }
   }
 
@@ -65,10 +71,10 @@ public class CaravanGameModel implements GameModel {
       if (is("d", m)){
           if (playerHand.isFull()){
               System.out.println("Your deck is full! You can't draw anymore. Try another input");
-              return 1;
+              return -1;
           }
           //draw card code
-          return 0;
+          return 1;
       }else if ((is("1",m) || is("2",m) || is("3",m) || is("4",m) || is("5",m)) && !deck){
           System.out.println("You chose " + (playerHand.getCards().get(parseInt(m))).toString() + ".");
           this.playCard(parseInt(m));
@@ -82,7 +88,7 @@ public class CaravanGameModel implements GameModel {
 
           if (playerHand.isEmpty()){
               System.out.println("Deck is empty! Move invalid.");
-              return 1;
+              return -1;
           }
           System.out.println("What card do you wish to DISCARD? (1-5 / Selected Card) ");
           Scanner scanner = new Scanner(System.in);
@@ -90,8 +96,9 @@ public class CaravanGameModel implements GameModel {
               int i = parseInt(scanner.nextLine());
               boolean isInRange = (1 <= i && i <= playerHand.getSize());
               if (isInRange){
-                  playerHand.removeCard(i);
-                  return 0;
+                  Card card = playerHand.removeCard(i);
+                  System.out.println("You discarded " + card.toString() + "\n Updated Hand: " + playerHand.displayAsHand());
+                  return 1;
               }else {
                   System.out.println("Invalid input. Try again.");
               }
