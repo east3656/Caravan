@@ -1,6 +1,8 @@
 package main.model;
 
 
+import java.util.Scanner;
+
 import static java.lang.Integer.parseInt;
 
 
@@ -46,28 +48,60 @@ public class CaravanGameModel implements GameModel {
           return 0;
       }
       else{
-          this.parseMove(n, deck);
-          return 1;
-          //complete code with enemy movement, etc.
+          int pass;
+          do {
+              pass = this.parseMove(n, deck);
+          }while(pass!=0);
+
+          return 0;
       }
   }
 
 
 
 
-    public void parseMove(String m, boolean deck){
+    public int parseMove(String m, boolean deck){
 
       if (is("d", m)){
+          if (playerHand.isFull()){
+              System.out.println("Your deck is full! You can't draw anymore. Try another input");
+              return 1;
+          }
           //draw card code
+          return 0;
       }else if ((is("1",m) || is("2",m) || is("3",m) || is("4",m) || is("5",m)) && !deck){
           System.out.println("You chose " + (playerHand.getCards().get(parseInt(m))).toString() + ".");
           this.playCard(parseInt(m));
+          return 0;
       }else if((is("1",m) || is("2",m) || is("3",m)) && deck){
           assert currentCard!=null;
 
+          return 0;
 
-      }else {
+      }else if(is(m,"f")){
+
+          if (playerHand.isEmpty()){
+              System.out.println("Deck is empty! Move invalid.");
+              return 1;
+          }
+          System.out.println("What card do you wish to DISCARD? (1-5 / Selected Card) ");
+          Scanner scanner = new Scanner(System.in);
+          while(true){
+              int i = parseInt(scanner.nextLine());
+              boolean isInRange = (1 <= i && i <= playerHand.getSize());
+              if (isInRange){
+                  playerHand.removeCard(i);
+                  return 0;
+              }else {
+                  System.out.println("Invalid input. Try again.");
+              }
+          }
+
+
+      }
+      else {
           System.out.println("Invalid input. Try again");
+          return 2;
       }
     }
 

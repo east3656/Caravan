@@ -10,4 +10,6 @@ public interface Deck {
     String displayAsHand();
     int returnAllRankValue();
     Card removeCard(int i);
+    int getSize();
+    boolean isFull();
 }

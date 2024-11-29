@@ -31,10 +31,7 @@ public class PokerDeck implements Deck {
 
     }
 
-    public int getMaxSize(){
-        return maxSize;
-    }
-
+@Override
     public int getSize(){
         return cards.size();
     }
@@ -58,6 +55,7 @@ public class PokerDeck implements Deck {
 
     @Override
     public Card removeCard(int i) {
+
         Card c = cards.get(i);
         cards.remove(i);
         return c;
@@ -100,6 +98,11 @@ public class PokerDeck implements Deck {
             e+=card.getRankValue();
         }
         return e;
+    }
+
+    @Override
+    public boolean isFull(){
+        return maxSize==this.getSize();
     }
 
 

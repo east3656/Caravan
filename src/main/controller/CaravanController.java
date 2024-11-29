@@ -32,11 +32,11 @@ public class CaravanController {
 
             System.out.println("Your turn: select a card to draw from your hand. ");
             int a = game.parseInput(scanner.nextLine().toLowerCase(), false);
-            System.out.println("Select the deck number you'd like to apply it to: ");
+            if (a == -1)break;
+            System.out.println("Select the deck number you'd like to add your Card to: ");
             int b = game.parseInput(scanner.nextLine().toLowerCase(), true );
-            if (a == -1 || b == -1) {
-                break;
-            }
+            if ( b == -1)break;
+
 
         }
         scanner.close();
