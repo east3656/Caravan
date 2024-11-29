@@ -1,8 +1,6 @@
 package main.model;
 
 
-import java.util.Scanner;
-
 import static java.lang.Integer.parseInt;
 
 
@@ -10,6 +8,7 @@ public class CaravanGameModel implements GameModel {
   private final Deck playerHand;
   private final Deck opponentHand;
 
+  private Card currentCard;
 
   private static String helpCenter(){
       return ("To play any card in your hand, you must input the correct number \n" +
@@ -37,34 +36,36 @@ public class CaravanGameModel implements GameModel {
   }
 
 
-  public int parseInput(String n){
+  public int parseInput(String n, boolean deck){
+
       if (is("quit", n) || is("q", n)) {
           return -1;
-
       }
       if(is("help", n) || is("h", n)){
           System.out.println(helpCenter());
           return 0;
       }
       else{
-
-          this.move(n);
+          this.parseMove(n, deck);
           return 1;
           //complete code with enemy movement, etc.
       }
-      //unreachable code
   }
 
 
 
 
-    public void move(String m){
+    public void parseMove(String m, boolean deck){
 
       if (is("d", m)){
           //draw card code
-      }else if (is("1",m) || is("2",m) || is("3",m) || is("4",m) || is("5",m)){
+      }else if ((is("1",m) || is("2",m) || is("3",m) || is("4",m) || is("5",m)) && !deck){
           System.out.println("You chose " + (playerHand.getCards().get(parseInt(m))).toString() + ".");
           this.playCard(parseInt(m));
+      }else if((is("1",m) || is("2",m) || is("3",m)) && deck){
+          assert currentCard!=null;
+
+
       }else {
           System.out.println("Invalid input. Try again");
       }
@@ -73,7 +74,7 @@ public class CaravanGameModel implements GameModel {
   
   @Override
   public void playCard(int m) {
-      // implement move.
+      currentCard = playerHand.removeCard(m);
   }
 
 

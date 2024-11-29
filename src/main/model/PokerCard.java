@@ -5,9 +5,6 @@ import java.util.Random;
 
 public class PokerCard implements Card{
 
-
-
-
     private final Rank rank;
     private final Suit suit;
 

@@ -57,8 +57,10 @@ public class PokerDeck implements Deck {
     }
 
     @Override
-    public Card removeCard() {
-        return null;
+    public Card removeCard(int i) {
+        Card c = cards.get(i);
+        cards.remove(i);
+        return c;
     }
 
 

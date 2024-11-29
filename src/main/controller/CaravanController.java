@@ -30,8 +30,11 @@ public class CaravanController {
             game.displayPlayerHand();
             System.out.println("For help on controls, input h or help");
 
-            int n = game.parseInput(scanner.nextLine().toLowerCase());
-            if (n == -1) {
+            System.out.println("Your turn: select a card to draw from your hand. ");
+            int a = game.parseInput(scanner.nextLine().toLowerCase(), false);
+            System.out.println("Select the deck number you'd like to apply it to: ");
+            int b = game.parseInput(scanner.nextLine().toLowerCase(), true );
+            if (a == -1 || b == -1) {
                 break;
             }
 
