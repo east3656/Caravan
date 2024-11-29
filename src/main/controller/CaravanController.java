@@ -39,7 +39,6 @@ public class CaravanController {
                 if ( b == -1)break;
             }
 
-
         }
 
 

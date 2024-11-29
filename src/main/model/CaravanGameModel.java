@@ -40,6 +40,13 @@ public class CaravanGameModel implements GameModel {
 
   public int parseInput(boolean deck){
 
+
+      /*Return code is key here:
+      * if we return 0, then we
+      * confirm to the controller that we
+      * will be putting a card in one of our decks.
+      *
+      * */
       Scanner scanner = new Scanner(System.in);
               String n = scanner.nextLine();
       if (is("quit", n) || is("q", n)) {
@@ -47,7 +54,7 @@ public class CaravanGameModel implements GameModel {
       }
       if(is("help", n) || is("h", n)){
           System.out.println(helpCenter());
-          return 0;
+          return 3;
       }
 
       else{
