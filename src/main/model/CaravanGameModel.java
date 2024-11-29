@@ -19,6 +19,10 @@ public class CaravanGameModel implements GameModel {
 
   }
 
+  public void displayPlayerHand(){
+      System.out.println("Your hand: " + playerHand.displayAsHand());
+  }
+
   
   public CaravanGameModel() {
 
@@ -32,41 +36,25 @@ public class CaravanGameModel implements GameModel {
       return a.equalsIgnoreCase(b);
   }
 
-  @Override
-  public void startGame() {
-      Scanner scanner = new Scanner(System.in);
 
-
-      CaravanGameModel game = new CaravanGameModel();
-
-
-      System.out.println("You are currently playing Console text-based Caravan.");
-
-      while (true){
-
-          System.out.println("Your hand: " + playerHand.displayAsHand());
-          System.out.println("For help on controls, input h or help");
-          while (true) {
-              String userInput = scanner.nextLine().toLowerCase().trim();
-              if (is("quit", userInput) || is("q", userInput)) {
-                  break;
-
-              }
-              if(is("help", userInput) || is("h", userInput)){
-                  System.out.println(helpCenter());
-              }
-              else{
-
-                  game.move(userInput);
-                  //complete code with enemy movement, etc.
-              }
-          }
-          break;
+  public int parseInput(String n){
+      if (is("quit", n) || is("q", n)) {
+          return -1;
 
       }
-      scanner.close();
-
+      if(is("help", n) || is("h", n)){
+          System.out.println(helpCenter());
+          return 0;
       }
+      else{
+
+          this.move(n);
+          return 1;
+          //complete code with enemy movement, etc.
+      }
+      //unreachable code
+  }
+
 
 
 
@@ -75,7 +63,7 @@ public class CaravanGameModel implements GameModel {
       if (is("d", m)){
           //draw card code
       }else if (is("1",m) || is("2",m) || is("3",m) || is("4",m) || is("5",m)){
-          System.out.println("You chose " + (playerHand.getCards().get(parseInt(m) - 1)).toString() + ".");
+          System.out.println("You chose " + (playerHand.getCards().get(parseInt(m))).toString() + ".");
           this.playCard(parseInt(m));
       }else {
           System.out.println("Invalid input. Try again");

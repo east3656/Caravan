@@ -1,7 +1,6 @@
 package main.model;
 
 public interface GameModel {
-    void startGame();
 
     //Actions
     void playCard(int m);
