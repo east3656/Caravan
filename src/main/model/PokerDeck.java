@@ -9,17 +9,22 @@ import java.util.List;
 public class PokerDeck implements Deck {
     private final List<Card> cards = new ArrayList<>();
     private final int maxSize; //this is the MAX LIMIT SIZE OF A DECK. NOT THE ACTUAL SIZE OF THE DECK
+    private final List<Runnable> listeners = new ArrayList<>();
 
-
-    public PokerDeck(){
+    public PokerDeck(boolean isEmpty){
         maxSize = 52;
-        for (Rank rank: Rank.values()){
-            for (Suit suit: Suit.values()){
-                cards.add(new PokerCard(rank, suit));
+        if(!isEmpty){
+
+
+            for (Rank rank: Rank.values()){
+                for (Suit suit: Suit.values()){
+                    cards.add(new PokerCard(rank, suit));
+                }
             }
+            Collections.shuffle(cards);
         }
-        Collections.shuffle(cards);
     }
+
 
     public PokerDeck(int n){
         assert n>0;
@@ -105,6 +110,16 @@ public class PokerDeck implements Deck {
         return maxSize==this.getSize();
     }
 
+    @Override
+    public void addListener(Object listener) {
+        listeners.add((Runnable) listener);
+    }
+
+    private void notifyListeners() {
+        for (Runnable listener : listeners) {
+            listener.run();
+        }
+    }
 
 
 

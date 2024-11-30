@@ -12,4 +12,6 @@ public interface Deck {
     Card removeCard(int i);
     int getSize();
     boolean isFull();
+
+    void addListener(Object render);
 }
