@@ -9,11 +9,13 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-        // Create game model
-        GameModel model = new CaravanGameModel();
+
 
         List<Deck> playerDecks = List.of(new PokerDeck(true), new PokerDeck(true), new PokerDeck(true));
         List<Deck> opponentDecks = List.of(new PokerDeck(true), new PokerDeck(true), new PokerDeck(true));
+
+
+
         // Create displays
         CompositeDisplay playerDisplay = new CompositeDisplay(playerDecks, "Player");
         CompositeDisplay opponentDisplay = new CompositeDisplay(opponentDecks, "Opponent");

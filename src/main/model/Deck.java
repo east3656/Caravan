@@ -13,5 +13,6 @@ public interface Deck {
     int getSize();
     boolean isFull();
 
-    void addListener(Object render);
+
+    void addListener(Runnable listener);
 }

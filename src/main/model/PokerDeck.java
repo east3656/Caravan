@@ -54,6 +54,7 @@ public class PokerDeck implements Deck {
             return false;
         }
 
+        notifyListeners();
         cards.add(card);
         return true;//INCOMPLETE
     }
@@ -111,8 +112,8 @@ public class PokerDeck implements Deck {
     }
 
     @Override
-    public void addListener(Object listener) {
-        listeners.add((Runnable) listener);
+    public void addListener(Runnable listener) {
+        listeners.add(listener);
     }
 
     private void notifyListeners() {

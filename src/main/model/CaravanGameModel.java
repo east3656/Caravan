@@ -1,6 +1,8 @@
 package main.model;
 
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 import static java.lang.Integer.parseInt;
@@ -9,13 +11,14 @@ import static java.lang.Integer.parseInt;
 public class CaravanGameModel implements GameModel {
   private final Deck playerHand;
   private final Deck opponentHand;
-
+  private final List<Deck> playerPiles;
+  private final List<Deck> opponentPiles;
   private Card currentCard;
 
   private static String helpCenter(){
       return ("To play any card in your hand, you must input the correct number \n" +
       "from 1 to 5 associated with it. If permissible and you wish to \n " +
-              "draw a card, select D key.\n" +
+              "draw a card, select d. If you wish to discard a card from\n your hand, select f." +
               "To quit, input q or quit.");
 
   }
@@ -25,11 +28,13 @@ public class CaravanGameModel implements GameModel {
   }
 
   
-  public CaravanGameModel() {
+  public CaravanGameModel(List<Deck> playerDecks, List<Deck> opponentDecks) {
 
     //initialize hands of opponents
       playerHand = new PokerDeck(5);
       opponentHand = new PokerDeck(5);
+      playerPiles = playerDecks;
+      opponentPiles = opponentDecks;
 
   }
 
@@ -83,11 +88,16 @@ public class CaravanGameModel implements GameModel {
           //draw card code
           return 1;
       }else if ((is("1",m) || is("2",m) || is("3",m) || is("4",m) || is("5",m)) && !deck){
+
           System.out.println("You chose " + (playerHand.getCards().get(parseInt(m))).toString() + ".");
-          this.playCard(parseInt(m));
+          currentCard = playerHand.removeCard(parseInt(m));
           return 0;
       }else if((is("1",m) || is("2",m) || is("3",m)) && deck){
           assert currentCard!=null;
+
+          System.out.println("You put the " + currentCard + " into the " + getDeckNum(parseInt(m)) + " deck ");
+
+
 
           return 0;
 
@@ -104,7 +114,7 @@ public class CaravanGameModel implements GameModel {
               boolean isInRange = (1 <= i && i <= playerHand.getSize());
               if (isInRange){
                   Card card = playerHand.removeCard(i);
-                  System.out.println("You discarded " + card.toString() + "\n Updated Hand: " + playerHand.displayAsHand());
+                  System.out.println("You discarded " + card.toString());
                   return 1;
               }else {
                   System.out.println("Invalid input. Try again.");
@@ -119,10 +129,14 @@ public class CaravanGameModel implements GameModel {
       }
     }
 
-  
+  public String getDeckNum(int m){
+      String i;
+      if (m==1){i="left";}else if (m==2){i="middle";}else{i="right";}
+      return i;
+  }
   @Override
   public void playCard(int m) {
-      currentCard = playerHand.removeCard(m);
+
   }
 
 
