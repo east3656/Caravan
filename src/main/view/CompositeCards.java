@@ -5,18 +5,19 @@ import java.util.List;
 
 import main.model.*;
 
-public class CompositeDisplay {
-    private final List<Deck> decks;
-    private final String owner; // "enemy" or "player"
+public class CompositeCards {
+    private List<Deck> decks;
+    private String owner; // "enemy" or "player"
 
-    public CompositeDisplay(List<Deck> decks, String owner) {
+    public CompositeCards(List<Deck> decks, String owner) {
         this.decks = decks;
         this.owner = owner;
+    }
 
-        // Register as a listener to each deck
-        for (Deck deck : decks) {
-            deck.addListener(this::render);
-        }
+    public void addCard(Card c, int i){
+        assert !decks.isEmpty();
+        decks.get(i).addCard(c);
+
     }
 
     public void render() {

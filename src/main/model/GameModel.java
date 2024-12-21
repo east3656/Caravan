@@ -3,12 +3,7 @@ package main.model;
 public interface GameModel {
 
     //Actions
-    void playCard(int m);
-    void playCardOpp();
-
-    
-
-    
+    void startGame();
 //    boolean isGameOver();
 //    void playTurn(Player player);
 //    void endGame();

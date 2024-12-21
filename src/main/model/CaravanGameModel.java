@@ -1,7 +1,8 @@
 package main.model;
 
 
-import java.util.ArrayList;
+import main.view.CompositeCards;
+
 import java.util.List;
 import java.util.Scanner;
 
@@ -11,44 +12,24 @@ import static java.lang.Integer.parseInt;
 public class CaravanGameModel implements GameModel {
   private final Deck playerHand;
   private final Deck opponentHand;
-  private final List<Deck> playerPiles;
-  private final List<Deck> opponentPiles;
+  private final CompositeCards playerPiles;
+  private final CompositeCards opponentPiles;
   private Card currentCard;
 
-  private static String helpCenter(){
-      return ("To play any card in your hand, you must input the correct number \n" +
-      "from 1 to 5 associated with it. If permissible and you wish to \n " +
-              "draw a card, select d. If you wish to discard a card from\n your hand, select f." +
-              "To quit, input q or quit.");
-
-  }
-
-  public void displayPlayerHand(){
-      System.out.println("Your hand: " + playerHand.displayAsHand());
-  }
-
-  
-  public CaravanGameModel(List<Deck> playerDecks, List<Deck> opponentDecks) {
-
-    //initialize hands of opponents
+  public CaravanGameModel() {
+    //initialize hands of opponents and the decks.
       playerHand = new PokerDeck(5);
       opponentHand = new PokerDeck(5);
-      playerPiles = playerDecks;
-      opponentPiles = opponentDecks;
+
+      playerPiles = new CompositeCards(List.of(new PokerDeck(true), new PokerDeck(true), new PokerDeck(true)), "Player");
+      opponentPiles = new CompositeCards(List.of(new PokerDeck(true), new PokerDeck(true), new PokerDeck(true)), "Opponent");
 
   }
-
-  public static boolean is(String a, String b){
-      return a.equalsIgnoreCase(b);
-  }
-
 
   public int parseInput(boolean deck){
-
-
       /*Return code is key here:
       * if we return 0, then we
-      * confirm to the controller that we
+      * confirm that we
       * will be putting a card in one of our decks.
       *
       * */
@@ -75,17 +56,16 @@ public class CaravanGameModel implements GameModel {
       }
   }
 
-
-
-
-    public int parseMove(String m, boolean deck){
+  public int parseMove(String m, boolean deck){
 
       if (is("d", m)){
           if (playerHand.isFull()){
               System.out.println("Your deck is full! You can't draw anymore. Try another input");
               return -1;
           }
-          //draw card code
+
+          playerHand.addCard(new PokerCard());
+
           return 1;
       }else if ((is("1",m) || is("2",m) || is("3",m) || is("4",m) || is("5",m)) && !deck){
 
@@ -97,6 +77,9 @@ public class CaravanGameModel implements GameModel {
 
           System.out.println("You put the " + currentCard + " into the " + getDeckNum(parseInt(m)) + " deck ");
 
+          playCard(currentCard, Integer.parseInt(m));
+
+          currentCard = null;
 
 
           return 0;
@@ -120,8 +103,6 @@ public class CaravanGameModel implements GameModel {
                   System.out.println("Invalid input. Try again.");
               }
           }
-
-
       }
       else {
           System.out.println("Invalid input. Try again");
@@ -129,21 +110,60 @@ public class CaravanGameModel implements GameModel {
       }
     }
 
+    @Override
+    public void startGame(){
+        System.out.println("You are currently playing Console text-based Caravan.");
+
+        while (true) {
+
+            displayPlayerHand();
+            playerPiles.render();
+            opponentPiles.render();
+            System.out.println("For help on controls, input h or help");
+
+            System.out.println("Your turn: select a card to draw from your hand, or choose to draw/discard. ");
+            int a = parseInput(false);
+
+            if (a == -1)break;
+            else if (a == 0) {
+                System.out.println("Select the deck number you'd like to add your Card to: (1-3)");
+                int b = parseInput(true );
+                if ( b == -1)break;
+            }
+
+        }
+    }
+
   public String getDeckNum(int m){
       String i;
       if (m==1){i="left";}else if (m==2){i="middle";}else{i="right";}
       return i;
   }
-  @Override
-  public void playCard(int m) {
 
+  public void playCard(Card c, int m) {
+      playerPiles.addCard(c,m-1);
   }
 
 
-  @Override 
   public void playCardOpp(){
     // implement 
   }
+
+  private static String helpCenter(){
+        return ("To play any card in your hand, you must input the correct number \n" +
+                "from 1 to 5 associated with it. If permissible and you wish to \n " +
+                "draw a card, select d. If you wish to discard a card from\n your hand, select f." +
+                "To quit, input q or quit.");
+
+  }
+
+  public void displayPlayerHand(){
+        System.out.println("Your hand: " + playerHand.displayAsHand());
+  }
+
+  public static boolean is(String a, String b){
+        return a.equalsIgnoreCase(b);
+    }
 
 //  @Override
 //  boolean isGameOver(){return false;}

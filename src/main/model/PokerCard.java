@@ -38,7 +38,4 @@ public class PokerCard implements Card{
     public String toString() {
         return rank + " of " + suit;
     }
-
-    
-
 }
