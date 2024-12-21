@@ -131,6 +131,15 @@ public class CaravanGameModel implements GameModel {
                 if ( b == -1)break;
             }
 
+            if (isGameOver()){
+                if(playerPiles.isWinning()){
+                    System.out.println("You won!");
+                }else {
+                    System.out.println("Another win for the Texas Ranger.");
+                }
+                break;
+            }
+
         }
     }
 
@@ -165,8 +174,10 @@ public class CaravanGameModel implements GameModel {
         return a.equalsIgnoreCase(b);
     }
 
-//  @Override
-//  boolean isGameOver(){return false;}
-//
+    @Override
+    public boolean isGameOver(){
+      return playerPiles.isWinning() | opponentPiles.isWinning();
+    }
+
  
 }

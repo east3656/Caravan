@@ -122,6 +122,15 @@ public class PokerDeck implements Deck {
         }
     }
 
+    public boolean isWinning(){
+        int score  = 0;
+        for (Card card: cards){
+            score += card.getRankValue();
+        }
+
+        return (score>=21 && score <=26);
+    }
+
 
 
 }

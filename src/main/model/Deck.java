@@ -13,6 +13,7 @@ public interface Deck {
     int getSize();
     boolean isFull();
 
+    boolean isWinning();
 
     void addListener(Runnable listener);
 }

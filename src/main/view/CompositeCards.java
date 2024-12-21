@@ -55,5 +55,16 @@ public class CompositeCards {
         }
         System.out.println(labelBuilder.toString().stripTrailing());
     }
+
+    public boolean isWinning(){
+
+        for (Deck d : decks){
+
+            if (!d.isWinning()){return false;}
+
+        }
+
+        return true;
+    }
 }
 
